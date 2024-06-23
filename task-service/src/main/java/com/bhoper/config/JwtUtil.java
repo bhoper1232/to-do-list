@@ -14,7 +14,7 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-    private final String SECRET_KEY = "secret";
+    private final String SECRET_KEY = "a6f3472e9f2cdb593d794cdee43a66bce617a421c46da06cdd947e79f98564f9";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -39,6 +39,7 @@ public class JwtUtil {
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("ROLES", userDetails.getAuthorities());
         return createToken(claims, userDetails.getUsername());
     }
 
